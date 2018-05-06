@@ -1,10 +1,10 @@
   <template>
     <div>
-      <div class="header" :style="'background-color: '+bgcolor">
+      <div class="header" :style="'background-color: '+$store.state.color">
         <span class="header-btn" >首页</span>
-        <span class="header-title">Title</span>
+        <span class="header-title">{{$store.state.title}}</span>
       </div>
-      <div class="footer">
+      <div class="footer" :style="'background-color: '+$store.state.color">
         <ul>
           <!--<li><router-link to="/">电影</router-link></li>-->
           <!--<li><router-link to="/music">音乐</router-link></li>-->
@@ -21,7 +21,10 @@
 
 
   <script>
+
+    import store from '@/vuex/store'
   export default({
+    store,
     data(){
         return {
             bgcolor:'red'
@@ -30,9 +33,7 @@
       methods:{
           routerLink(path){
               this.$router.push(path);
-              if(path == 'book'){
-                  this.bgcolor = 'blue'
-              }
+
           }
       }
   })
