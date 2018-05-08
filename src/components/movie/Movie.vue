@@ -1,48 +1,98 @@
-  <template>
-    <div>
-      <ul>
-        <li v-for="val in datas" :key="val.id"></li>
-        {{val.nm}}
-      </ul>
+<template>
+  <div>
+    <ul>
+      <li class="items" v-for="val in datas" :key="val.id">
+        <div class="item-img">
+          <img :src="val.img" alt="">
+        </div>
+        <div class="item-info">
+          <h4>{{val.nm}}</h4>
+          <p>{{val.ver}}</p>
+          <p>主演：{{val.star}}</p>
+          <p>{{val.showInfo}}</p>
+        </div>
+      </li>
+    </ul>
+    <div class="loading" v-show="isLoading">
+      <img src="@/assets/img/jiaza.gif" alt="" >
     </div>
-  </template>
-
-
-  <script>
-    import store from '@/vuex/store'
-    import axios from 'axios'
-    export default({
-      data(){
-        return{
-          datas:[],
-        }
-      },
-      store,
-      methods:{
-          getData(){//远程代理+接口    接口地址 ?  参数 & 连接
-            axios.get(API_PROXY+'http://m.maoyan.com/movie/list.json?type=hot&offset=0&limit=10')  //接口，访问的地址
-              .then((response)=>  {
-//                  console.log(this);//匿名函数的this是windows，所以变成箭头函数
-                this.datas =response.data.data.movies;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-      },
-      created(){
-        this.$store.commit('routeLinks',{
-          color:"rgb(33,150,243)",
-          title:"电影",
-        });
-
-        //-------ajax获取数据尽量卸载created里
-        this.getData();
+    <div>
+      <h3 v-show="isEnd">到底了</h3>
+    </div>
+  </div>
+</template>
+<script>
+  import store from '@/vuex/store'
+  import axios from 'axios'
+  export default({
+    data(){
+      return{
+        datas:[],
+        isLoading:false,
+        isEnd:false,
       }
-    })
-  </script>
+    },
+    store,
+    methods:{
+      getData(){
+        axios.get(API_PROXY+'http://m.maoyan.com/movie/list.json?type=hot&offset='+ this.datas.length+'&limit=10')
+          .then((response)=> {
+            this.datas =this.datas.concat(response.data.data.movies);
+            this.isLoading = false;
+            console.log(this.datas);
+            if(response.data.data.movies.length == 0){
+              this.isEnd = true;
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    created () {
+      this.$store.commit('routerLinks',{
+        color:'rgb(33, 150, 243)',
+        title:'电影'
+      });
+      this.getData();
+    },
+    mounted () {
+      window.onscroll=()=>{
+        let scrollTop = document.documentElement.scrollTop;
+        let scrollHeigth = document.documentElement.scrollHeight;
+        let clientHeight = document.documentElement.clientHeight;
+        if(scrollTop+clientHeight==scrollHeigth){
+          if(!this.isLoading){
+            if(this.isEnd){
+            }else{
+              this.isLoading = true;
+              //setTimeout(()=>{
+              this.getData()
+              //},200)
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
+<style scoped>
+  .items{
+    border-bottom: 1px solid #333;
+    margin-bottom: .1rem;
+    padding-bottom: .1rem;
+    display: flex;
+  }
+  .item-img{
+    flex-grow: 1;
+    width: 0;
+  }
+  .item-info{
+    flex-grow: 2;
+    padding-left: 0.1rem;
+    width: 0;
+  }
+  .loading{
 
-  <style scoped>
-
-
+  }
   </style>
