@@ -8,7 +8,7 @@
     export default({
       store,
       created(){
-        this.$store.commit('routeLinks',{
+        this.$store.commit('routerLinks',{
           color:"black",
           title:"photo",
         });

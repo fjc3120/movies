@@ -31,7 +31,7 @@
         }
     },
       methods:{
-          routerLink(path){
+        routerLink(path){
               this.$router.push(path);
 
           }

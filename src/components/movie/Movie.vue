@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li class="items" v-for="val in datas" :key="val.id">
-        <div class="item-img">
+        <div class="item-img" >
           <img :src="val.img" alt="">
         </div>
         <div class="item-info">
@@ -45,7 +45,7 @@
             }
           })
           .catch((error) => {
-            console.log(error);
+            console.log("电影加载失败");
           });
       }
     },

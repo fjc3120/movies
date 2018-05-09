@@ -14,7 +14,7 @@ const state={
 }
 
 const mutations ={
-  routeLinks(state,params){
+  routerLinks(state,params){
     state.title = params.title;
     state.color = params.color;
   }

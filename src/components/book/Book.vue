@@ -17,7 +17,7 @@
 //      }
                                             /*生命周期*/
       created(){                         /*创建成功之后*/
-                 this.$store.commit('routeLinks',{
+                 this.$store.commit('routerLinks',{
               color:"red",
               title:"book",
           });
