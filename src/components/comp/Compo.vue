@@ -1,7 +1,7 @@
   <template>
     <div>
       <div class="header" :style="'background-color: '+$store.state.color">
-        <span class="header-btn" >首页</span>
+        <span class="header-btn" @click="toMovie" >首页</span>
         <span class="header-title">{{$store.state.title}}</span>
       </div>
       <div class="footer" :style="'background-color: '+$store.state.color">
@@ -33,8 +33,10 @@
       methods:{
         routerLink(path){
               this.$router.push(path);
-
-          }
+          },
+        toMovie(){
+          this.$router.push('/');
+        }
       }
   })
   </script>

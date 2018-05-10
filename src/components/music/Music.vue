@@ -26,13 +26,19 @@
           color:"green",
           title:"music",
         });
-        axios.get('/static/data/musiclist.json').then((res) =>{
-          console.log(res);
-          this.musicList = res.data.albums;
-        })
+        this.getData();
       },
-      components : {
-        Aplayer,
+
+      methods:{
+          getData(){
+            axios.get('/static/data/musiclist.json')
+              .then((res) =>{
+              console.log(res);
+              this.musicList = res.data.albums;
+            }).catch((res)=>{
+              console.log("erroor!");
+            })
+          }
       },
     })
   </script>

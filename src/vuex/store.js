@@ -10,7 +10,8 @@ Vue.use(Vuex)
 
 const state={
   title:"电影",
-  color:"rgb(33, 150, 243)"
+  color:"rgb(33, 150, 243)",
+  
 }
 
 const mutations ={

@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li class="items" v-for="val in datas" :key="val.id">
+      <li  class="items" v-for="val in datas" :key="val.id" @click="toDetail(val.id)">
         <div class="item-img" >
           <img :src="val.img" alt="">
         </div>
@@ -47,7 +47,10 @@
           .catch((error) => {
             console.log("电影加载失败");
           });
-      }
+      },
+      toDetail (id){
+        this.$router.push({ name:'MovieDetail', params:{ movieId:id} });
+      },
     },
     created () {
       this.$store.commit('routerLinks',{
