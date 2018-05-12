@@ -3,7 +3,6 @@
       <li class="music" v-for="item in musicList" :key="item.id">
         <router-link :to="'musicAlbums/' + item.id">
           <img :src="item.bg" alt="">
-
         </router-link>
       </li>
     </ul>

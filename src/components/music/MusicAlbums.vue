@@ -1,7 +1,7 @@
 <template>
   <div>
     <aplayer  v-if="isReady"
-              :music = music
+              :music=music
               :list = musiclist
               :showLrc = true
     />

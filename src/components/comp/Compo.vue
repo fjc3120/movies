@@ -77,7 +77,7 @@
     .footer ul{
       width: 100%;
       display: flex;/*--弹性盒模型 放父级*/
-      flex-direction: row;/**/
+      flex-direction: row;/*方向*/
     }
     .footer ul li{
       flex-grow:1 ;/*一等分*/

@@ -37,7 +37,7 @@ import axios from 'axios'
     },
     data(){
         return{
-            detailId:this.$route.params.movieId,
+            detailId:this.$route.params.movieId, //上一个页面的参数
           detailData:{},
         }
     },
